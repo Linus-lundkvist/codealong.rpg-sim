@@ -31,6 +31,8 @@ def main():
     print(bufa)
     print()
     print(eskil)
+    print()
+    print(salka)
 
 
 
@@ -39,7 +41,7 @@ def main():
     print("\nRåttor")
     print(enemies[0],"\n",enemies[1])
 
-    fight(mulle, enemies)
+    fight(eskil, enemies)
 
 if __name__ == "__main__":
     main()
