@@ -1,5 +1,5 @@
-from re import S
-from resources import Character, Råtta
+
+from resources import Character, Råtta, Adam
 import random 
 
 
@@ -31,15 +31,17 @@ def new_fight(players: list, enemis : list):
             print(f"{char.get_name()} has killd {target.get_name()}")
             if (type(target) == Råtta):
                 enemis.remove(target)
+            elif (type(target) == Adam):
+                enemis.remove(target)
             else:
                 players.remove(target)
             participents.remove(target)
+
         else: 
-            print(f"{target.get_name()} was attacked bu {char.get_name()}.")
+            print(f"{target.get_name()} was attacked by {char.get_name()}.")
             print(f"{target.get_name()} has {target.get_health()} healhpoints left.")
-
-
-
+        if len(players) == 0 or len(enemis) == 0:
+            break
 
 def main():
     enemies = []
@@ -50,10 +52,11 @@ def main():
     eskil = Character("Eskil", 20, 20, 0) #15
     salka = Character("salka", 10, 3, 0) #25
 
-    adam = Råtta("Adam", 1, 0.5, 0)
-    råtta = Råtta("Råtta", 3, 2.5, 1)
+    #adam = Råtta("Adam", 1, 0.5, 0)
+    #råtta = Råtta("Råtta", 3, 2.5, 1)
 
     players.append(salka)
+    players.append(eskil)
 
     print(mulle)
     print()
@@ -63,18 +66,15 @@ def main():
     print()
     print(salka)
 
-    print("\nRåttor")
-    print(adam)
-    print()
-    print(råtta)
-    print()
-    #print(enemies[0],"\n",enemies[1])
-
-    for _ in range(0,random.randint(1,3)):
+    adams = 0
+    råttor = 0
+    for _ in range(0,random.randint(1,20)):
         if 1 == random.randint(1,2):
-            enemies.append(adam)
+            adams = adams + 1
+            enemies.append(Adam(adams))
         elif 2 == random.randint(1,2):
-            enemies.append(råtta)
+            råttor = råttor + 1     
+            enemies.append(Råtta(råttor))
 
 
     #fight(eskil, enemies)
