@@ -2,6 +2,9 @@
 #global variebels
 
 #classes
+from numpy import character
+
+
 class Character:
 
     def __init__(self, name, health, damage, armor):
@@ -27,6 +30,9 @@ class Character:
     
     def get_name(self):
         return self.name
+
+    def get_all_atributs(self):
+        return self.name, self.health, self.damage, self.armor
 
 class Råtta:
 
@@ -83,4 +89,34 @@ class Adam:
 #functions
 def hello():
     print("Hello World")
+
+def save_character(character : Character):
+    """
+    Tar in caraktär, bryter ner dess atribut och sparar ner på fil.
+
+    Aegs: 
+        character (character): Det objekt som ska sparas ner på fil.
+
+    """
+
+    name, health, damage, armor = character.get_all_atributs()
+    with open("character_file.text", "w", encoding="utf8") as f:
+        save_sting = f"{name}/{health}/{damage}/{armor}\n"
+        f.write(save_sting)
+        print(f"{name} has been successfully saved. ")
+
+def load_characters():
+
+    with open("character_file.text", "r", encoding="utf8") as f:
+        characters = [] 
+        for line in f.readlines():
+            attributes = line.split("/")
+            this_char = Character(attributes[0],
+                                  int(attributes[1]),
+                                  int(attributes[2]),
+                                  int(attributes[3]))
+            characters.append(this_char)
+    print("Characters has ben loaded")
+    return characters
+
 #main code

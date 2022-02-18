@@ -1,5 +1,5 @@
 
-from resources import Character, Råtta, Adam
+from resources import Character, Råtta, Adam, save_character, load_characters
 import random 
 
 
@@ -40,8 +40,7 @@ def new_fight(players: list, enemis : list):
         else: 
             print(f"{target.get_name()} was attacked by {char.get_name()}.")
             print(f"{target.get_name()} has {target.get_health()} healhpoints left.")
-        if len(players) == 0 or len(enemis) == 0:
-            break
+        if len(players) == 0 or len(enemis) == 0: break
 
 def main():
     enemies = []
@@ -52,7 +51,7 @@ def main():
     eskil = Character("Eskil", 20, 20, 0) #15
     salka = Character("salka", 10, 3, 0) #25
 
-    #adam = Råtta("Adam", 1, 0.5, 0)
+    #adam = Råtta("Adam", 1, 0.5, 0)  
     #råtta = Råtta("Råtta", 3, 2.5, 1)
 
     players.append(salka)
@@ -85,7 +84,11 @@ def main():
     elif len(players) == 0:
         print("The Råttoe won!")
 
+    #save_character(eskil)
+    players = load_characters()
 
+    for player in players:
+        print(player)
 
 
 if __name__ == "__main__":
