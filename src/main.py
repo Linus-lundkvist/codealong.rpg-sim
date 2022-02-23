@@ -1,5 +1,6 @@
 
-from resources import Character, Råtta, Adam, save_character, load_characters
+from re import T
+from resources import Character, Råtta, Adam, Weapon, save_character, load_characters, create_character
 import random 
 
 
@@ -44,30 +45,19 @@ def new_fight(players: list, enemis : list):
 
 def main():
     enemies = []
-    players = []
-
-    mulle = Character("Mulle", 30, 28, 0) #17
-    bufa = Character("Bufa", 15, 48, 0) #7
-    eskil = Character("Eskil", 20, 20, 0) #15
-    salka = Character("salka", 10, 3, 0) #25
-
-    #adam = Råtta("Adam", 1, 0.5, 0)  
-    #råtta = Råtta("Råtta", 3, 2.5, 1)
-
-    players.append(salka)
-    players.append(eskil)
-
-    print(mulle)
-    print()
-    print(bufa)
-    print()
-    print(eskil)
-    print()
-    print(salka)
+    players = load_characters()
 
     adams = 0
     råttor = 0
-    for _ in range(0,random.randint(1,20)):
+
+    print("wold you like to create a new character? (y/n)")
+    new_char = input(": ")
+    if new_char.lower() == "y":
+        new = create_character()
+        players.append(new)
+
+    amount_of_goblins = int(input("How many enemies "))
+    for i in range(0,amount_of_goblins):
         if 1 == random.randint(1,2):
             adams = adams + 1
             enemies.append(Adam(adams))
@@ -75,21 +65,56 @@ def main():
             råttor = råttor + 1     
             enemies.append(Råtta(råttor))
 
+    # mulle = Character("Mulle", 30, 28, 0) #17
+    # bufa = Character("Bufa", 15, 48, 0) #7
+    # eskil = Character("Eskil", 20, 20, 0) #15
+    # salka = Character("salka", 10, 3, 0) #25
+    # #adam = Råtta("Adam", 1, 0.5, 0)  
+    # #råtta = Råtta("Råtta", 3, 2.5, 1)
+
+    # players.append(salka)
+    # players.append(eskil)
+
+    # print(mulle)
+    # print()
+    # print(bufa)
+    # print()
+    # print(eskil)
+    # print()
+    # print(salka)
+
+    # adams = 0
+    # råttor = 0
+    # for _ in range(0,random.randint(1,20)):
+    #     if 1 == random.randint(1,2):
+    #         adams = adams + 1
+    #         enemies.append(Adam(adams))
+    #     elif 2 == random.randint(1,2):
+    #         råttor = råttor + 1     
+    #         enemies.append(Råtta(råttor))
+
 
     #fight(eskil, enemies)
     while len(enemies) != 0 and len(players) != 0:
         new_fight(players, enemies)
     if len(enemies) == 0:
         print("The players won!")
+        print("Would you like to save the the remaning characters? (y/n)")
+        while True:
+            save_progress = input(": ")
+            if save_progress.lower() == "y":
+                save_character(players)
+                break
+            elif save_progress.lower == "n":
+                break
+            else: 
+                print("That whas not valid")
+
     elif len(players) == 0:
         print("The Råttoe won!")
 
-    #save_character(eskil)
-    players = load_characters()
-
     for player in players:
-        print(player)
-
+        print(f"{player}\n")
 
 if __name__ == "__main__":
     main()
