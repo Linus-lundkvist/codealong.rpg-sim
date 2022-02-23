@@ -21,6 +21,7 @@ def new_fight(players: list, enemis : list):
 
     for char in participents:
         #check if råtta or character
+        target = ""
         if char in players:
             target = random.choice(enemis)
 
